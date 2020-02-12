@@ -10,7 +10,8 @@ width = 600
 
 fields = []
 
-
+# suppress chained assignment warning
+pd.set_option('mode.chained_assignment',None)
 
 
 
@@ -87,6 +88,7 @@ df = pd.read_csv("data.csv")
 
 df = df.sort_values(by=['top']) #.reset_index(drop=True)
 df['group'] = df['group'].astype(object)
+print("Original:\n ",df)
 
 
 min_field_height = df['height'].min()
@@ -140,7 +142,7 @@ def assign_from_last(curr_df,parent_group,df):
                     if parent_group is not None:
                         df.at[prevIndex,'group'] = [parent_group,index]
                     else:
-                        df['group'][prevIndex]=index
+                        df.at[prevIndex,'group']=index
                 if row.type=='field':
                     prevIndex=index
 
@@ -153,7 +155,7 @@ def assign_from_last(curr_df,parent_group,df):
                     if parent_group is not None:
                         df.at[index,'group']=[parent_group,prevIndexValue]
                     else:
-                        df['group'][index]=prevIndexValue
+                        df.at[index,'group']=prevIndexValue
 
         if curr_df.iloc[0].type=='checkbox':
             prevIndex=curr_df.index[0]
@@ -162,7 +164,7 @@ def assign_from_last(curr_df,parent_group,df):
                     if parent_group is not None:
                         df.at[prevIndex,'group'] = [parent_group,index]
                     else:
-                        df['group'][prevIndex]=index
+                        df.at[prevIndex,'group']=index
                 if row.type=='checkbox':
                     prevIndex=index
     return curr_df
@@ -178,13 +180,17 @@ while(element < df.shape[0]-1):
     element+=1;labels=0;fields=0;checkboxes=0
     in_strip_elements=0
     topy=0;bottomy=0
-    ERROR = (max_field_height - df['height'][element] )/2
-    topy=df['top'][element] - ERROR
-    bottomy=df['height'][element]+df['top'][element] + ERROR
-#     print('top:',topy,'bottom:',bottomy)
-    curr_df = df[(df.top>=topy) & (df.top+df.height<=bottomy)]
+    ERROR = (max_field_height - df.iloc[element].height )/2
+    topy=df.iloc[element].top - ERROR
+    bottomy=df.iloc[element].height+df.iloc[element].top + ERROR
+
+    print('top:',topy,'bottom:',bottomy,"\n")
+
+    curr_df = df[(df.top>=topy) & (df.top+df.height<=bottomy)].copy()
     curr_df=curr_df.sort_values(by='left') # .reset_index(drop=True)
+
     print(curr_df,"\n")
+
     for i in range(curr_df.shape[0]):
         element+=1
         in_strip_elements+=1
@@ -196,7 +202,7 @@ while(element < df.shape[0]-1):
             checkboxes+=1
     element-=1
 
-    if element==1:
+    if in_strip_elements==1:
         if curr_df.iloc[0].type=='label':
             parent_group=curr_df.index[0]
             # set parent_group to all elements in below strip
@@ -208,7 +214,7 @@ while(element < df.shape[0]-1):
                 #Error
 
     if (labels>0 and ( fields>0 or checkboxes>0 )):
-        assign_from_last(curr_df,parent_group,df)
+        curr_df=assign_from_last(curr_df,parent_group,df)
 
 
 print('new DF:\n',df)
