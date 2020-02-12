@@ -208,8 +208,9 @@ while(element < df.shape[0]-1):
 
         if curr_df.iloc[0].type=='field':
             if parent_group is not None:
-                curr_df.iloc[0].group=parent_group
-            else:pass
+                df.at[curr_df.index[0],'group']=parent_group
+            else:
+                print("parent_group is missing")
                 #Error
 
     if (labels>0 and ( fields>0 or checkboxes>0 )):
