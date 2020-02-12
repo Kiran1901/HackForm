@@ -47,7 +47,7 @@
           "featureId": "ck6i01x4o166j0ybptobf8juf",
           "schemaId": "ck6hzg8egbzcb0842jp0rfkd8",
           "title": "label",
-          "value": "label",
+          "value": "date",
           "color": "#FF0000",
           "bbox": {
             "top": 362,
@@ -61,7 +61,7 @@
           "featureId": "ck6i0254j0eyn0xbrcbnvai1m",
           "schemaId": "ck6hzg8egbzcb0842jp0rfkd8",
           "title": "label",
-          "value": "label",
+          "value": "title",
           "color": "#FF0000",
           "bbox": {
             "top": 187,
@@ -75,7 +75,7 @@
           "featureId": "ck6i027l915g20ybeumtyr7ov",
           "schemaId": "ck6hzg8egbzcb0842jp0rfkd8",
           "title": "label",
-          "value": "label",
+          "value": "name",
           "color": "#FF0000",
           "bbox": {
             "top": 580,
@@ -89,7 +89,7 @@
           "featureId": "ck6i02s770ezu0xbr5fyw9ell",
           "schemaId": "ck6hzg8egbzcb0842jp0rfkd8",
           "title": "label",
-          "value": "label",
+          "value": "phone",
           "color": "#FF0000",
           "bbox": {
             "top": 741,
@@ -103,7 +103,7 @@
           "featureId": "ck6i02xzv15hp0ybe712eouy3",
           "schemaId": "ck6hzg8egbzcb0842jp0rfkd8",
           "title": "label",
-          "value": "label",
+          "value": "email",
           "color": "#FF0000",
           "bbox": {
             "top": 749,
@@ -117,7 +117,7 @@
           "featureId": "ck6i038wb0f0n0xbriv4724g0",
           "schemaId": "ck6hzg8egbzcb0842jp0rfkd8",
           "title": "label",
-          "value": "label",
+          "value": "checkbox title",
           "color": "#FF0000",
           "bbox": {
             "top": 950,
@@ -131,7 +131,7 @@
           "featureId": "ck6i03fhy168k0ybp34rmvy4y",
           "schemaId": "ck6hzg8egbzcb0842jp0rfkd8",
           "title": "label",
-          "value": "label",
+          "value": "yes",
           "color": "#FF0000",
           "bbox": {
             "top": 1072,
@@ -145,7 +145,7 @@
           "featureId": "ck6i03kc115im0ybeqh033vfr",
           "schemaId": "ck6hzg8egbzcb0842jp0rfkd8",
           "title": "label",
-          "value": "label",
+          "value": "no",
           "color": "#FF0000",
           "bbox": {
             "top": 1081,
@@ -159,7 +159,7 @@
           "featureId": "ck6i03qcs0f1m0xbrnt1i4196",
           "schemaId": "ck6hzg8egbzcb0842jp0rfkd8",
           "title": "label",
-          "value": "label",
+          "value": "somewhat",
           "color": "#FF0000",
           "bbox": {
             "top": 1089,
@@ -173,7 +173,7 @@
           "featureId": "ck6i03x28169g0ybppnv7ikfr",
           "schemaId": "ck6hzg8egbzcb0842jp0rfkd8",
           "title": "label",
-          "value": "label",
+          "value": "comments",
           "color": "#FF0000",
           "bbox": {
             "top": 1220,
@@ -187,7 +187,7 @@
           "featureId": "ck6i04a3o15jm0ybeqwocus8s",
           "schemaId": "ck6hzg8egbzcc0842agil1rni",
           "title": "field",
-          "value": "field",
+          "value": "date",
           "color": "#FF8000",
           "bbox": {
             "top": 344,
@@ -201,7 +201,7 @@
           "featureId": "ck6i04hhd16af0ybpwgydi6nr",
           "schemaId": "ck6hzg8egbzcc0842agil1rni",
           "title": "field",
-          "value": "field",
+          "value": "name",
           "color": "#FF8000",
           "bbox": {
             "top": 536,
@@ -215,7 +215,7 @@
           "featureId": "ck6i04me116aq0ybpcmetwtoq",
           "schemaId": "ck6hzg8egbzcc0842agil1rni",
           "title": "field",
-          "value": "field",
+          "value": "phone",
           "color": "#FF8000",
           "bbox": {
             "top": 719,
@@ -229,7 +229,7 @@
           "featureId": "ck6i04rdv0f3w0xbrqstfs42n",
           "schemaId": "ck6hzg8egbzcc0842agil1rni",
           "title": "field",
-          "value": "field",
+          "value": "email",
           "color": "#FF8000",
           "bbox": {
             "top": 715,
@@ -243,7 +243,7 @@
           "featureId": "ck6i04xb80f4a0xbroz3bypv7",
           "schemaId": "ck6hzg8egbzcc0842agil1rni",
           "title": "field",
-          "value": "field",
+          "value": "com 1",
           "color": "#FF8000",
           "bbox": {
             "top": 1338,
@@ -257,7 +257,7 @@
           "featureId": "ck6i055yh00080yblbdxdltpu",
           "schemaId": "ck6hzg8egbzcc0842agil1rni",
           "title": "field",
-          "value": "field",
+          "value": "com 2",
           "color": "#FF8000",
           "bbox": {
             "top": 1547,
@@ -271,7 +271,7 @@
           "featureId": "ck6i05hrt15lh0ybe3q4yl4ig",
           "schemaId": "ck6hzg8egbzcc0842agil1rni",
           "title": "field",
-          "value": "field",
+          "value": "com 3",
           "color": "#FF8000",
           "bbox": {
             "top": 1752,
@@ -285,7 +285,7 @@
           "featureId": "ck6i05uo1001g0ybl3ltxnj1a",
           "schemaId": "ck6hzg8egbzcc0842agil1rni",
           "title": "field",
-          "value": "field",
+          "value": "com 4",
           "color": "#FF8000",
           "bbox": {
             "top": 1987,
@@ -299,7 +299,7 @@
           "featureId": "ck6i06emp002g0yblmuhoy14p",
           "schemaId": "ck6hzg8egbzcc0842agil1rni",
           "title": "field",
-          "value": "field",
+          "value": "com 5",
           "color": "#FF8000",
           "bbox": {
             "top": 2209,
@@ -313,7 +313,7 @@
           "featureId": "ck6i074z0003l0ybltbuk803h",
           "schemaId": "ck6hzg8egbzcd0842m7x3pw7r",
           "title": "checkbox",
-          "value": "checkbox",
+          "value": "yes",
           "color": "#FFFF00",
           "bbox": {
             "top": 1059,
@@ -327,7 +327,7 @@
           "featureId": "ck6i0797m0f810xbrglg9b3wo",
           "schemaId": "ck6hzg8egbzcd0842m7x3pw7r",
           "title": "checkbox",
-          "value": "checkbox",
+          "value": "no",
           "color": "#FFFF00",
           "bbox": {
             "top": 1085,
@@ -341,7 +341,7 @@
           "featureId": "ck6i07clf003x0yblzmx4c34m",
           "schemaId": "ck6hzg8egbzcd0842m7x3pw7r",
           "title": "checkbox",
-          "value": "checkbox",
+          "value": "somewhat",
           "color": "#FFFF00",
           "bbox": {
             "top": 1072,
