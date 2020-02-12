@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import csv
 import json
-
+import math
 
 
 height = 730
@@ -218,3 +218,38 @@ while(element < df.shape[0]-1):
 
 
 print('new DF:\n',df)
+
+mappingDict={}
+def create_dict_from_df(dfx):
+    print('Method create dict============')
+    for index,row in dfx.iterrows():
+        if type(row["group"])!=list:
+            # print('yo')
+            if math.isnan(row["group"]):
+                print('Nan')
+            else:
+                print('not nan')
+                mappingDict[str(row["group"])]=row
+        else:
+            print('list',row["group"])
+            p=0
+            for j in row["group"]:
+                p+=1
+                if p==1:
+                    mappingDict[""+str(j)]={}
+                    tmp=j
+                if p<len(row["group"]):
+                    tmp2 = row["group"][row["group"].index(j)+1]
+                    mappingDict[""+str(tmp)][""+str(row["group"][row["group"].index(j)+1])]={}
+                else:
+                    mappingDict[""+str(tmp)][""+str(tmp2)]=row
+
+
+
+create_dict_from_df(df)
+print("=====================================================")
+# for x,y in mappingDict.items():
+    # print(x,"\n",y,"\n")
+    # print(y)
+#     print(y,"\n")
+print(mappingDict)
