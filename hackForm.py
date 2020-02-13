@@ -235,7 +235,6 @@ def create_dict_from_df(dfx):
 
             tmpDict=tmpDict2={}
             for x in row["group"]:
-
                 if(x==row["group"][-1]):
                     tmpDict2[str(x)] = row
                 else:
