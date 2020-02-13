@@ -218,13 +218,11 @@ while(element < df.shape[0]-1):
 
 
 print('new DF:\n',df)
-
 mappingDict={}
 def create_dict_from_df(dfx):
     print('Method create dict============')
     for index,row in dfx.iterrows():
         if type(row["group"])!=list:
-            # print('yo')
             if math.isnan(row["group"]):
                 print('Nan')
             else:
@@ -232,24 +230,35 @@ def create_dict_from_df(dfx):
                 mappingDict[str(row["group"])]=row
         else:
             print('list',row["group"])
+            print('yo')
             p=0
-            for j in row["group"]:
-                p+=1
-                if p==1:
-                    mappingDict[""+str(j)]={}
-                    tmp=j
-                if p<len(row["group"]):
-                    tmp2 = row["group"][row["group"].index(j)+1]
-                    mappingDict[""+str(tmp)][""+str(row["group"][row["group"].index(j)+1])]={}
+
+            tmpDict=tmpDict2={}
+            for x in row["group"]:
+
+                if(x==row["group"][-1]):
+                    tmpDict2[str(x)] = row
                 else:
-                    mappingDict[""+str(tmp)][""+str(tmp2)]=row
+                    tmpDict2[str(x)] = {}
+                tmpDict2=tmpDict2[str(x)]
 
-
-
+            print("========tmpDict ===========\n")
+            print(tmpDict)
+            nxt = next(iter(tmpDict))
+            if nxt in mappingDict:
+                print('yse')
+                mappingDict[nxt].update(tmpDict[nxt])
+            else:
+                print('no000...')
+                mappingDict.update(tmpDict)
 create_dict_from_df(df)
+
 print("=====================================================")
-# for x,y in mappingDict.items():
-    # print(x,"\n",y,"\n")
-    # print(y)
-#     print(y,"\n")
+for x,y in mappingDict.items():
+    print(type(y))
+    if type(y)==pd.core.series.Series:
+        print("series")
+    else:
+        print("dict")
+print('||||||||||||||||||||||| Mapp ||||||||||||||||||||||||||||||||||||\n')
 print(mappingDict)
