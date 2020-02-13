@@ -11,9 +11,6 @@ width = 600
 fields = []
 
 
-
-
-
 def generateDf(filename):
     jsonObj = json.load(open(filename, 'r'))
     newJson = jsonObj[2]['Label']['objects']
@@ -29,6 +26,7 @@ def generateDf(filename):
 # df = generateDf('exported_json.json')
 
 df = pd.read_csv("data.csv")
+
 # print("DFFFF:\n",df)
 
 
