@@ -26,8 +26,8 @@ def generateDf(filename):
     return df
 
 # df = generateDf('exported_json.json')
-
-df = pd.read_csv("data.csv")
+# df = pd.read_csv("data.csv")
+df = pd.read_csv("visit-feedback.csv")
 
 # print("DFFFF:\n",df)
 
@@ -99,33 +99,52 @@ def assign_from_last(curr_df,parent_group,df):
     in_strip_elements=curr_df.shape[0]
 
     if in_strip_elements%2 == 1:          # yet to test
-        # set group of all elements after first,index(startIndex) of first
-        startIndex = curr_df.index[0]
-        parent_group = startIndex
+
+        parent_group = curr_df.index[0]
 
         if curr_df.iloc[0].type=='label':
-            if curr_df.iloc[1].type=='field':
-                prevIndex=curr_df.index[0]
-                for index,row in curr_df.iloc[1:].iterrows():
-                    if row.type=='label':
-                        df['group'][prevIndex]=[parent_group,index]
-                    if row.type=='field':
-                        prevIndex=index
-
-            if curr_df.iloc[1].type=='label':
-                prevIndex=curr_df.index[0]
-                for index,row in curr_df.iloc[1:].iterrows():
-                    if row.type=='label':
-                        prevIndex=index
-                    if row.type=='field':
-                        df['group'][index]=[parent_group,prevIndex]
-
-            if curr_df.iloc[0].type == 'checkbox':
-                prevIndex = curr_df.index[0]
-                for index, row in curr_df.iloc[1:].iterrows():
+            if curr_df.iloc[1].type == 'field':
+                prevIndex = curr_df.index[1]
+                for index, row in curr_df.iloc[2:].iterrows():
                     if row.type == 'label':
-                        df['group'][prevIndex] = [parent_group,index]
-                    if row.type == 'checkbox':
+                        if parent_group is not None:
+                            df.at[prevIndex, 'group'] = [parent_group, index]
+                        else:
+                            df.at[prevIndex, 'group'] = index
+                    if row.type == 'field':
+                        prevIndex = index
+
+            if curr_df.iloc[1].type == 'label':
+                prevIndexValue = curr_df.index[1]
+                for index, row in curr_df.iloc[2:].iterrows():
+                    if row.type == 'label':
+                        prevIndexValue = index
+                    if row.type == 'field' or row.type == 'checkbox' or row.type == 'radio':
+                        if parent_group is not None:
+                            df.at[index, 'group'] = [parent_group, prevIndexValue]
+                        else:
+                            df.at[index, 'group'] = prevIndexValue
+
+            if curr_df.iloc[1].type == 'checkbox':
+                prevIndex = curr_df.index[1]
+                for index, row in curr_df.iloc[2:].iterrows():
+                    if row.type == 'label':
+                        if parent_group is not None:
+                            df.at[prevIndex, 'group'] = [parent_group, index]
+                        else:
+                            df.at[prevIndex, 'group'] = index
+                    if row.type == 'field' or row.type == 'checkbox' or row.type == 'radio':
+                        prevIndex = index
+
+            if curr_df.iloc[1].type == 'radio':
+                prevIndex = curr_df.index[1]
+                for index, row in curr_df.iloc[2:].iterrows():
+                    if row.type == 'label':
+                        if parent_group is not None:
+                            df.at[prevIndex, 'group'] = [parent_group, index]
+                        else:
+                            df.at[prevIndex, 'group'] = index
+                    if row.type == 'field' or row.type == 'checkbox' or row.type == 'radio':
                         prevIndex = index
 
         else:
@@ -150,7 +169,7 @@ def assign_from_last(curr_df,parent_group,df):
             for index,row in curr_df.iloc[1:].iterrows():
                 if row.type=='label':
                     prevIndexValue=index
-                if row.type=='field':
+                if row.type=='field' or row.type=='checkbox' or row.type=='radio':
                     if parent_group is not None:
                         df.at[index,'group']=[parent_group,prevIndexValue]
                     else:
@@ -164,8 +183,20 @@ def assign_from_last(curr_df,parent_group,df):
                         df.at[prevIndex,'group'] = [parent_group,index]
                     else:
                         df.at[prevIndex,'group']=index
-                if row.type=='checkbox':
+                if row.type=='field' or row.type=='checkbox' or row.type=='radio':
                     prevIndex=index
+
+        if curr_df.iloc[0].type=='radio':
+            prevIndex=curr_df.index[0]
+            for index,row in curr_df.iloc[1:].iterrows():
+                if row.type=='label':
+                    if parent_group is not None:
+                        df.at[prevIndex,'group'] = [parent_group,index]
+                    else:
+                        df.at[prevIndex,'group']=index
+                if row.type=='field' or row.type=='checkbox' or row.type=='radio':
+                    prevIndex=index
+
     return curr_df
 
 
@@ -176,7 +207,7 @@ parent_group=None
 newDf=pd.DataFrame(columns=df.columns)
 
 while(element < df.shape[0]-1):
-    element+=1;labels=0;fields=0;checkboxes=0
+    element+=1;labels=0;fields=0;checkboxes=0;radios=0
     in_strip_elements=0
     topy=0;bottomy=0
     ERROR = (max_field_height - df.iloc[element].height )/2
@@ -199,6 +230,8 @@ while(element < df.shape[0]-1):
             fields+=1
         if curr_df.iloc[i].type=='checkbox':
             checkboxes+=1
+        if curr_df.iloc[i].type == 'radio':
+            radios += 1
     element-=1
 
     if in_strip_elements==1:
@@ -213,24 +246,23 @@ while(element < df.shape[0]-1):
                 print("parent_group is missing")
                 #Error
 
-    if (labels>0 and ( fields>0 or checkboxes>0 )):
+    if (labels>0 and ( fields>0 or checkboxes>0 or radios>0)):
         curr_df=assign_from_last(curr_df,parent_group,df)
 
 
-print('new DF:\n',df)
+
+print('new DF:\n',df[df.type!='label'])
+
 mappingDict={}
 def create_dict_from_df(dfx):
-    print('Method create dict============')
+    # print('Method create dict============')
     for index,row in dfx.iterrows():
         if type(row["group"])!=list:
-            if math.isnan(row["group"]):
-                print('Nan')
+            if math.isnan(row["group"]):pass
+                # print('Nan')
             else:
-                print('not nan')
                 mappingDict[str(row["group"])]=row
         else:
-            print('list',row["group"])
-            print('yo')
             p=0
 
             tmpDict=tmpDict2={}
@@ -241,23 +273,9 @@ def create_dict_from_df(dfx):
                     tmpDict2[str(x)] = {}
                 tmpDict2=tmpDict2[str(x)]
 
-            print("========tmpDict ===========\n")
-            print(tmpDict)
             nxt = next(iter(tmpDict))
             if nxt in mappingDict:
-                print('yse')
                 mappingDict[nxt].update(tmpDict[nxt])
             else:
-                print('no000...')
                 mappingDict.update(tmpDict)
 create_dict_from_df(df)
-
-print("=====================================================")
-for x,y in mappingDict.items():
-    print(type(y))
-    if type(y)==pd.core.series.Series:
-        print("series")
-    else:
-        print("dict")
-print('||||||||||||||||||||||| Mapp ||||||||||||||||||||||||||||||||||||\n')
-print(mappingDict)
