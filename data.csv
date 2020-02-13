@@ -1,45 +1,22 @@
-type,top,left,height,width
-label,327,28,14,52
-label,326,345,16,57
-label,373,29,15,73
-label,373,342,15,27
-label,372,444,16,46
-label,410,30,16,75
-label,410,316,16,98
-label,447,29,16,30
-label,473,310,13,34
-label,474,385,13,29
-label,473,27,17,225
-label,289,30,16,63
-label,537,48,18,169
-label,510,30,16,252
-label,539,247,14,151
-label,538,431,17,143
-label,574,29,14,268
-label,610,46,15,99
-label,606,337,22,116
-label,647,47,14,98
-label,644,333,17,121
-field,310,88,30,245
-field,308,404,32,169
-field,357,108,30,224
-field,357,372,26,61
-field,358,498,28,75
-field,398,112,26,184
-field,398,421,26,150
-field,435,64,31,509
-field,596,152,25,111
-field,632,150,29,118
-field,597,461,26,109
-field,634,459,25,115
-checkbox,536,27,20,15
-checkbox,538,225,17,12
-checkbox,539,405,17,16
-checkbox,474,284,16,16
-checkbox,474,362,16,14
-checkbox,609,26,17,16
-checkbox,644,26,17,16
-checkbox,606,309,16,17
-checkbox,640,309,20,17
-useless,64,21,212,552
-label,672,29,17,141
+top,left,height,width,type,value,group
+362,1451,65,131,label,date,NaN
+580,292,56,148,label,name,NaN
+741,292,69,161,label,phone,NaN
+749,1151,61,139,label,email,NaN
+950,301,57,1041,label,checkbox title,NaN
+1072,445,70,104,label,yes,NaN
+1081,724,56,82,label,no,NaN
+1089,1002,61,258,label,somewhat,NaN
+1220,288,70,257,label,comments,NaN
+344,1665,96,614,field,date,NaN
+536,501,122,1351,field,name,NaN
+719,497,100,606,field,phone,NaN
+715,1316,104,854,field,email,NaN
+1338,301,187,1987,field,com 1,NaN
+1547,305,183,1978,field,com 2,NaN
+1752,305,213,1983,field,com 3,NaN
+1987,305,204,1978,field,com 4,NaN
+2209,301,157,2000,field,com 5,NaN
+1059,305,91,101,checkbox,yes,NaN
+1085,584,57,96,checkbox,no,NaN
+1072,854,70,92,checkbox,somewhat,NaN
