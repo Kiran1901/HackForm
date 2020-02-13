@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import csv
 import json
-
+import math
 
 
 height = 730
@@ -10,6 +10,8 @@ width = 600
 
 fields = []
 
+
+pd.set_option('mode.chained_assignment',None)
 
 def generateDf(filename):
     jsonObj = json.load(open(filename, 'r'))
@@ -216,3 +218,46 @@ while(element < df.shape[0]-1):
 
 
 print('new DF:\n',df)
+mappingDict={}
+def create_dict_from_df(dfx):
+    print('Method create dict============')
+    for index,row in dfx.iterrows():
+        if type(row["group"])!=list:
+            if math.isnan(row["group"]):
+                print('Nan')
+            else:
+                print('not nan')
+                mappingDict[str(row["group"])]=row
+        else:
+            print('list',row["group"])
+            print('yo')
+            p=0
+
+            tmpDict=tmpDict2={}
+            for x in row["group"]:
+                if(x==row["group"][-1]):
+                    tmpDict2[str(x)] = row
+                else:
+                    tmpDict2[str(x)] = {}
+                tmpDict2=tmpDict2[str(x)]
+
+            print("========tmpDict ===========\n")
+            print(tmpDict)
+            nxt = next(iter(tmpDict))
+            if nxt in mappingDict:
+                print('yse')
+                mappingDict[nxt].update(tmpDict[nxt])
+            else:
+                print('no000...')
+                mappingDict.update(tmpDict)
+create_dict_from_df(df)
+
+print("=====================================================")
+for x,y in mappingDict.items():
+    print(type(y))
+    if type(y)==pd.core.series.Series:
+        print("series")
+    else:
+        print("dict")
+print('||||||||||||||||||||||| Mapp ||||||||||||||||||||||||||||||||||||\n')
+print(mappingDict)
